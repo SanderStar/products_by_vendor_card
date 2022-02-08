@@ -1,0 +1,58 @@
+{
+	"_version": "1.14.0",
+	"sap.app": {
+		"id": "ns.products_by_vendor_card",
+		"type": "card",
+		"title": "Products by Vendor Card",
+		"subTitle": "Integration Card of Type List",
+		"applicationVersion": {
+			"version": "1.0.0"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+        "deviceTypes": {"desktop": true, "phone": true, "tablet": true},
+		"icons": {
+			"icon": "sap-icon://list"
+		}
+	},
+	"sap.card": {
+		"type": "List",
+        "configuration": {
+            "destinations": {
+                "NORTHWIND": {
+                    "name": "NORTHWIND",
+                   "defaultUrl": "/V2/OData/OData.svc/"
+                }
+            }
+        },
+        "designtime": "dt/configuration",
+		"header": {
+			"title": "List Card with Top 5 Products",
+			"subTitle": "These are the top sellers this month",
+			"icon": {
+				"src": "sap-icon://desktop-mobile"
+			},
+			"status": {
+				"text": "5 of 20"
+			}
+		},
+		"content": {
+			"data": {
+                    "request": {
+                "url": "{{destinations.NORTHWIND}}/V2/OData/OData.svc/Products",
+                "withCredentials": true
+                                            },
+                                "path": "/d/results"
+			},
+			"item": {
+				"title": "{Name}",
+				"description": "{Description}",
+				"highlight": "{id}"
+			}
+		}
+	},
+    "sap.platform.mobilecards": {
+        "compatible": false
+    }
+}
